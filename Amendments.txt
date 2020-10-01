@@ -1,0 +1,33 @@
+﻿Create NEW VIEW
+RptSales
+
+SELECT        dbo.Sales.OrderNo, dbo.Sales.Date, dbo.Sales.CustomerCode, dbo.Sales.CustomerName, dbo.Sales.SourceDoc, dbo.Sales.AmountPaid, dbo.Sales.OrderValue, dbo.Sales.Discount, dbo.Sales.VAT, 
+                         dbo.Sales.AmtInWord, dbo.Sales.PaymentMode, dbo.Sales.PaymentDetails, dbo.Sales.DateCleared, dbo.Sales.ReceiptNo, dbo.Sales.Username, dbo.Sales.DepositTag, dbo.SalesDetails.SalesIndex, 
+                         dbo.SalesDetails.ProductCode, dbo.SalesDetails.ProductName, dbo.SalesDetails.CategoryCode, dbo.SalesDetails.CategoryName, dbo.SalesDetails.Qty, dbo.SalesDetails.SellPrice, dbo.SalesDetails.FixedPrice, 
+                         dbo.SalesDetails.CostPrice, dbo.SalesDetails.Details, dbo.SalesDetails.SalesPerson, dbo.SalesDetails.RefundQty, 'Coy' AS Company
+FROM            dbo.Sales INNER JOIN
+                         dbo.SalesDetails ON dbo.Sales.OrderNo = dbo.SalesDetails.OrderNo
+
+________________________________________________
+
+shakara RptCompany
+____________________________________________________
+
+NEW VIEW RptSalesParticulars
+
+SELECT        dbo.Sales.*, dbo.Services.TransDate, dbo.Services.Name, dbo.Services.AmountChargedFromReward, 'Coy' AS Company
+FROM            dbo.Sales LEFT OUTER JOIN
+                         dbo.Services ON dbo.Sales.ReceiptNo = dbo.Services.Sn
+
+_____________________________________________________________
+
+
+
+NEW VIEW RptServices
+
+SELECT        Sn, TransDate, RefNo, Name, Telephone, ServiceRendered, ValueOfService, AmountPaid, AmountChargedFromReward, Username, 'Coy' AS Company
+FROM            dbo.Services
+
+
+________________________________________________________________________
+
